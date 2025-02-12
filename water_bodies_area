@@ -1,6 +1,6 @@
 Map.centerObject(geometry)
 
-var time_start= "2015", time_end= "2021"
+var time_start= "2013", time_end= "2022"
 
 var landsat = imageCollection
 .filterDate(time_start, time_end)
@@ -14,7 +14,7 @@ var landsat = imageCollection
   
 }).median();
 
-Map.addLayer(landsat.clip(geometry), [],'ndwi_summer',false)
+Map.addLayer(landsat.clip(geometry), [],'ndwi_summer/fall',false)
 Map.addLayer(landsat.clip(geometry).gt(0), [], 'ndwi_thr', false);
 var thr = landsat.gt(0.3);
 var mask = thr.updateMask(thr);
