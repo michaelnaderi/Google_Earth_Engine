@@ -1,0 +1,22 @@
+Map.centerObject(geometry);
+
+
+var time_start = "2001", time_end = "2024"
+var modis = imageCollection.select("LC_Type1")
+.filterDate(time_start, time_end)
+
+function cropland_area(img){
+  var thr = img.eq(12).or(img.eq(14));
+  var mask = thr.updateMask(thr);
+  var area = mask.multiply(ee.Image.pixelArea().divide(1e6));
+  return area
+  .copyProperties(img, ["system:time_start","system:time_end" ])
+  
+}
+
+var cropland = modis.map(cropland_area);
+
+print(
+  ui.Chart.image.series(cropland, geometry, ee.Reducer.sum(),
+  500, "system:time_start")
+  )
