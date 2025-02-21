@@ -1,0 +1,59 @@
+Map.centerObject(geometry);
+
+
+var time_start = '2021', time_end = '2022'
+
+var gpm = imageCollection.select('precipitation')
+.filterDate(time_start, time_end);
+
+function temporal_collection(collection, start, count, interval, unit){
+  var seq =  ee.List.sequence(0, ee.Number(count).subtract(1));
+  var origin_date = ee.Date(time_start);
+  return ee.ImageCollection(seq.map(function(i){
+    var start_date = origin_date.advance(ee.Number(interval).multiply(i), unit);
+    var end_date = origin_date.advance(ee.Number(interval).multiply(ee.Number(i).add(1)), unit);
+    return collection.filterDate(start_date, end_date).sum()
+    .set('system:time_start', start_date.millis())
+    .set('system:time_end', end_date.millis())
+    }))
+  }
+
+var daily = temporal_collection(gpm, time_start, 1825, 1, 'days');
+
+print(
+  ui.Chart.image.series(daily, geometry, ee.Reducer.mean(),
+  11000, 'system:time_start').setChartType('ColumnChart')
+  )
+  
+var monthly = temporal_collection(gpm, time_start, 60, 1, 'month');
+
+print(
+  ui.Chart.image.series(monthly, geometry, ee.Reducer.mean(),
+  11000, 'system:time_start').setChartType('ColumnChart')
+  .setOptions({
+    title: 'monthly precpitation', 
+    series: {0:{color: 'red'}}
+
+    })
+  )
+  
+  var annualy = temporal_collection(gpm, time_start, 5, 1, 'year');
+
+print(
+  ui.Chart.image.series(annualy, geometry, ee.Reducer.mean(),
+  11000, 'system:time_start').setChartType('ColumnChart')
+  .setOptions({
+    title: 'annual precpitation', 
+    series: {0:{color: 'orange'}}
+    })
+  )
+  
+  Export.image.toDrive({
+  image: annualy.toBands().clip(geometry).float(), 
+  description: 'precipitaton_annual', 
+  scale: 11000, 
+  region: geometry, 
+  maxPixels: 1e13,
+  crs: 'EPSG:4326', 
+  folder: 'test'
+  })
