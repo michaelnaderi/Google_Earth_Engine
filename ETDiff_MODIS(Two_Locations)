@@ -1,0 +1,21 @@
+var Evapotranspiration = imageCollection
+.filterDate("2023","2024")
+.map(function(img){
+  var bands =img.select("ET").multiply(0.1)
+  return bands.rename("MODIS_ET")
+  .copyProperties(img, img.propertyNames())
+})
+
+print(
+  ui.Chart.image.seriesByRegion(Evapotranspiration, geometry, ee.Reducer.mean(),
+  'MODIS_ET', 500, 'system:time_start', 'system:index')
+  .setChartType('AreaChart')
+  .setOptions({
+    title: 'Evapotranspiration Comparison', 
+    vAxis: {title: 'ET (mm)'}, hAxis: {title: 'Date'}, 
+    series: {0:{color: 'black', lineWidth: 4, pointSize: 5}, 
+    1:{color: 'red', lineWidth: 4, pointSize: 5}}
+    
+    
+    })
+  )
