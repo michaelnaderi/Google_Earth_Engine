@@ -1,0 +1,54 @@
+// Center the map on the study area
+Map.centerObject(geometry);
+
+// Load Sentinel-2 imagery and filter by date, location, and cloud cover
+var sentinel = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED")
+  .filterDate('2023-01-01', '2024-12-31')  // Select images from 2023 and 2024
+  .filterBounds(geometry)
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 45))
+  .map(function(img) {
+    var bands = img.select('B.*').multiply(0.0001);
+    var ndwi = bands.normalizedDifference(['B3', 'B8']).rename('ndwi');
+    var threshold = ndwi.gt(0.1); // Mask based on NDWI threshold
+    var ndci = bands.normalizedDifference(['B5', 'B4']).rename('ndci');
+    var chl_a = bands.select('B5').divide(bands.select('B4')).rename('chl_a'); // Chlorophyll-a Index
+    
+    return img.addBands([ndci, chl_a]).updateMask(threshold)
+      .copyProperties(img, ['system:time_start', 'system:time_end']);
+  });
+
+// Compute the average NDCI over the selected period
+var meanNDCI = sentinel.select('ndci').mean().clip(geometry);
+
+// Define visualization parameters
+var visParams = {
+  min: -0.5,
+  max: 0.5,
+  palette: ['blue', 'white', 'red'] // Blue for low NDCI, red for high NDCI
+};
+
+// Display the average NDCI layer on the map
+Map.addLayer(meanNDCI, visParams, 'Average NDCI (2023-2024)', true);
+
+// Create a time-series chart for Chlorophyll-a Index
+var chart = ui.Chart.image.series({
+  imageCollection: sentinel.select('chl_a'),
+  region: geometry,
+  reducer: ee.Reducer.mean(),
+  scale: 30,
+  xProperty: 'system:time_start'
+}).setOptions({
+  title: 'Chlorophyll-a Index Changes (2023-2024)',
+  hAxis: {title: 'Date', format: 'YYYY-MM'},
+  vAxis: {title: 'Mean Chlorophyll-a Index'},
+  lineWidth: 2,
+  pointSize: 4,
+  series: {0: {color: 'green'}}
+});
+
+// Print the chart to the console
+print(chart);
+
+// Print the image collection for verification
+print("Filtered Sentinel Collection:", sentinel);
+print("Mean NDCI Image:", meanNDCI);
