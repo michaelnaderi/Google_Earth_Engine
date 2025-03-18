@@ -1,0 +1,29 @@
+var jrc = ee.Image("JRC/GSW1_4/GlobalSurfaceWater")
+
+print(jrc)
+var occurence = jrc.select('occurrence')
+
+Map.addLayer(occurence, [], 'occurrence', false)
+var absolute_change = jrc.select('change_abs')
+
+Map.addLayer(absolute_change,[],'abs_change',false)
+
+var normalized_change = jrc.select('change_norm')
+
+Map.addLayer(normalized_change,[],'change_norm', false)
+
+var seasonal = jrc.select('seasonality')
+
+Map.addLayer(seasonal,[], 'seasonal', false)
+
+var recurrence = jrc.select('recurrence')
+
+Map.addLayer(recurrence,[],'recurrence',false)
+
+var transition = jrc.select('transition')
+
+Map.addLayer(transition,{min: 0, max: 10, palette:[
+  '#ffffff', '#0000ff', '#22b14c', '#d1102d', '#99d9ea', '#b5e61d', '#e6a1aa', '#ff7f27', '#ffc90e', 
+  '#7f7f7f', '#c3c3c3'
+  ]},'transition',false)
+
