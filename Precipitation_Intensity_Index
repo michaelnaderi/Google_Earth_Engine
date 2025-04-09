@@ -1,0 +1,39 @@
+var pr = ee.ImageCollection("NOAA/PERSIANN-CDR")
+.filterDate('2023','2024')
+
+var w = pr.map(function(img){
+  return img.gte(1)
+  }).sum()
+  
+Map.addLayer(w,[],'wet_days',false)
+
+var rr = pr.map(function(img){
+  var thr = img.gte(1)
+  return img.updateMask(thr)
+  }).sum();
+  
+Map.addLayer(rr,[],'sum_pr',false)
+
+var intensity = rr.divide(w).rename('pr_intensity')
+
+Map.addLayer(intensity,{palette:['red','white','blue']}, 'pr_intensity',false, 0.5)
+
+
+
+function pr_intensity(collection, date, thr){
+  var year = ee.Date(date)
+  var filter = collection.filterDate(year, year.advance(1, 'year'))
+  var num_wet = filter.map(function(img){
+  return img.gte(1)
+  }).sum();
+  var pr_total = filter.map(function(img){
+  return img.updateMask(img.gte(1))
+  }).sum();
+  var index = pr_total.divide(num_wet).rename('pr_intensity'+date)
+  Map.addLayer(index,{palette:['red','white','blue']}, 'pr_intensity_'+date,false, 0.5)
+  
+  return index
+  }
+  
+var sdii2010 = pr_intensity(ee.ImageCollection("NOAA/PERSIANN-CDR"), '2010', 1)
+var sdii2015 = pr_intensity(ee.ImageCollection("NOAA/PERSIANN-CDR"), '2015', 1)
