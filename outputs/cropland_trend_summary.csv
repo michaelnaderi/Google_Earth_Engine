@@ -1,0 +1,18 @@
+,value
+Period,2001–2023
+"Cropland area, first year (km²)",36902.74573416745
+"Cropland area, last year (km²)",38565.473975453555
+Net change (km²),1662.7282412861023
+Relative change (%),4.50570332425595
+Mean area (km²),33143.93069569085
+Std. dev. (km²),3103.2032944762786
+Coefficient of variation (%),9.362810111353921
+Max year,2023
+Min year,2011
+OLS slope (km²/yr),136.24800114019465
+OLS R²,0.08867427686670147
+OLS p-value,0.16758110447998747
+Theil–Sen slope (km²/yr),177.19142284310692
+Theil–Sen 95% CI,"[-89.01, 406.46]"
+Mann–Kendall tau,0.17786561264822134
+Mann–Kendall p-value,0.24828475995311994
