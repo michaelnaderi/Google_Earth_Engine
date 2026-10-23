@@ -1,0 +1,12 @@
+,value
+Period,1980-01 to 2022-12
+Months analysed,516
+Mean SPEI-12,0.15363920086879695
+Std. dev.,0.8902914737352206
+Driest month,2012-12 (-2.22)
+Wettest month,1993-09 (2.11)
+Months with SPEI ≤ -1.0 (%),10.65891472868217
+Theil–Sen slope (per decade),-0.11424635100478524
+Theil–Sen 95% CI (per decade),"[-0.180, -0.050]"
+Mann–Kendall tau,-0.10387596899224806
+Mann–Kendall p-value,0.0004195885912426494
