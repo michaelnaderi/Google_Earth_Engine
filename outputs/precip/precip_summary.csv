@@ -1,0 +1,14 @@
+,value
+Period,2005-01 to 2023-12
+Mean annual precipitation (mm),641.5806424499114
+Std. dev. of annual totals (mm),116.52313954268702
+Coefficient of variation (%),18.161885168127412
+Wettest year,2018 (783 mm)
+Driest year,2012 (359 mm)
+Wettest month (climatology),June (96 mm)
+Driest month (climatology),November (18 mm)
+Share of annual total in Apr–Sep (%),72.82738175874584
+Theil–Sen trend (mm/decade),-4.03240402663414
+Theil–Sen 95% CI (mm/decade),"[-111.3, 108.7]"
+Mann–Kendall tau,-0.017543859649122806
+Mann–Kendall p-value,0.945006868714699

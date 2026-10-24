@@ -1,0 +1,6 @@
+,SARIMAX,Climatology
+RMSE (mm),21.921,22.643
+MAE (mm),16.096,16.27
+Bias (mm),3.913,4.021
+Correlation,0.818,0.804
+Skill vs climatology (RMSE),0.032,
