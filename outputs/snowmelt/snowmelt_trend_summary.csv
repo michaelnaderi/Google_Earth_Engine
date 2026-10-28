@@ -1,0 +1,6 @@
+,Mean,Std. dev.,Theil–Sen /decade,Mann–Kendall p
+Spring temperature (°C),6.542,1.139,0.188,0.676
+Total snowmelt (mm),236.754,53.819,11.754,0.676
+Peak SWE (mm),145.66,45.707,11.017,0.53
+Peak SWE date (day of year),88.174,21.313,-3.182,0.491
+Melt midpoint (day of year),131.609,11.191,0.0,0.916
