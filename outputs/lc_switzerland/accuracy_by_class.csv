@@ -1,0 +1,13 @@
+Class,Points,Producer's accuracy,User's accuracy,F1
+Evergreen needleleaf forest,300,0.859,0.84,0.849
+Deciduous broadleaf forest,300,0.764,0.731,0.747
+Mixed forest,300,0.684,0.574,0.624
+Woody savanna,300,0.554,0.683,0.612
+Savanna,300,0.412,0.465,0.437
+Grassland,300,0.843,0.862,0.852
+Cropland,300,0.724,0.606,0.66
+Urban and built-up,300,0.75,0.679,0.712
+Cropland/natural mosaic,300,0.461,0.58,0.514
+Permanent snow and ice,300,0.848,0.913,0.88
+Barren,300,0.871,0.771,0.818
+Water,300,1.0,0.978,0.989
