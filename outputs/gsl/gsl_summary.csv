@@ -1,0 +1,11 @@
+,value
+Water threshold used (NDWI),0.289
+"Largest annual median area (km²), year","4,406 (2001)"
+"Smallest annual median area (km²), year","2,071 (2020)"
+"Smallest autumn area (km²), year","2,071 (2020)"
+Mean area 2001–2005 (km²),3701
+Mean area 2018–2022 (km²),2558
+Change between these periods (%),-30.9
+Theil–Sen trend (km²/year),-53.3
+Theil–Sen 95% range (km²/year),"[-75.9, -31.5]"
+Mann–Kendall p-value,0.0
