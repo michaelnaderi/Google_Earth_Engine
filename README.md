@@ -64,4 +64,4 @@ See the [LICENSE](LICENSE) file.
 
 ## Contact
 
-Michael Naderi — feel free to reach out through GitHub issues, or connect with me on LinkedIn.
+Mehdi Naderi — feel free to reach out through GitHub issues, or connect with me on LinkedIn.
