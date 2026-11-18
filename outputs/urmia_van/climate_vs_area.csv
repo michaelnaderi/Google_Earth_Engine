@@ -1,0 +1,3 @@
+Lake,Years compared,Rain vs. area change (Spearman ρ),p (rain),Temperature vs. area change (Spearman ρ),p (temperature),Basin rain 1995–1999 (mm/yr),Basin rain last 10 years (mm/yr),"Warming, last 10 years vs. reference (°C)"
+Lake Urmia,35,0.805,0.0,-0.261,0.129,422.293,450.736,1.025
+Lake Van,35,0.604,0.0,-0.358,0.035,396.808,376.289,1.247
